@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+
+.qui-somme-nous{
+    margin-bottom: 5rem;
+}
+
+.categorie{
+    margin-bottom: 5rem;
+    .card{
+        text-align: center;
+        width: 36%;
+    }
+    .swiper-wrapper{
+        margin-bottom: 3rem;
+    }
+}
+
+.title-categories{
+    text-decoration: none;
+    color: black;
+    margin-bottom: 3rem;
+}

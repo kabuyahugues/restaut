@@ -1,0 +1,141 @@
+@use '../abstracts' as *;
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    width: 80%;
+    margin: auto;
+}
+
+ul{
+    li{
+        list-style: none;
+        a{
+            text-decoration: none;
+            font-size: $mText;
+        }
+    }
+}
+
+h1 {
+    color: $blanc;
+    font-size: $gTitle;
+    margin-bottom: 2rem;
+}
+
+h2 {
+
+    font-size: $mTitle;
+    margin-bottom: 2rem;
+}
+
+p{
+    font-size: $mText;
+}
+
+.date{
+    font-size: $pText;
+}
+
+.marginBottom{
+    margin-bottom: $spacingLg;
+}
+
+.boder-bottom{
+    border-bottom: 1px solid $gris;
+    margin-bottom: $spacingLg;
+}
+
+.row{
+    @include gridMixin();
+}
+
+.block{
+    position: relative;
+    height: 100%;
+}
+
+.container-grid{
+    @include gridMixin(3rem);
+}
+
+.col12{
+    grid-column: span 12;
+}
+.col9{
+    grid-column: span 9;
+}
+.col6{
+    grid-column: span 6;
+}
+.col4{
+    grid-column: span 4 ;
+}
+.col3{
+    grid-column: span 3;
+}
+
+@media screen and ( min-width: 768px ) { 
+    .col-md-12{
+        grid-column: span 12;
+    }
+    .col-md-9{
+        grid-column: span 9;
+    }
+    .col-md-6{
+        grid-column: span 6;
+    }
+    .col-md-4{
+        grid-column: span 4 ;
+    }
+    .col-md-3{
+        grid-column: span 3;
+    } 
+    .col-md-2{
+        grid-column: span 2;
+    } 
+}
+
+
+.black{
+    color: $black;
+}
+
+.blanc{
+    color: $blanc;
+}
+
+.grisf{
+    color: $grisf;
+}
+
+.img{
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.lien{
+    @include lien();
+}
+
+.absolute{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wapper{
+    padding: 0 1rem;
+    @media screen and ( min-width: 768px ) { 
+        padding: 0 1rem;
+        width: 1140px;
+        margin: auto;
+    }
+}

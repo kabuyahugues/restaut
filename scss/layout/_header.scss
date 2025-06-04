@@ -1,0 +1,28 @@
+@use '../abstracts' as *;
+
+.header-index{
+    position: relative;
+    
+    background-image: url('../img/spaghetti-6639970_1920.jpg');
+    background-position: center;
+    background-size: cover;
+    &::before{
+        @include filtreBlack();
+    }
+}
+
+header{
+    padding: 15% 5%;
+    height: 70vh;
+    > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    p{
+        color: $blanc;
+        font-size: $gText;
+        padding-right: 30rem;
+    }
+    margin-bottom: 5rem;
+}

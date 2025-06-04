@@ -1,0 +1,72 @@
+@mixin btnMixin($border: 1px solid black, $border-radius: 10px, $padding: 10px 20px){
+    /* 
+    $border         → Définit la bordure (épaisseur, style et couleur) 
+    $border-radius  → Définit l'arrondi des coins 
+    $padding        → Définit l'espacement intérieur 
+    */
+    border: $border;
+    border-radius: $border-radius;
+    padding: $padding;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@mixin borderMixin($border, $padding){
+    border: $border;
+    padding: $padding;
+}
+
+@mixin imgMixin($width: 100%, $height: 100%, $objectif: cover) {
+    /* 
+    $width      → Définit la largeur de l'image (ex: 100%, 300px) 
+    $height     → Définit la hauteur de l'image (ex: auto, 200px) 
+    $object-fit → Définit comment l'image s'ajuste à son conteneur (ex: cover, contain, fill) 
+    */
+    width: $width;
+    height: $height;
+    object-fit: $objectif; 
+    display: block;
+}
+
+@mixin boxShadow($shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)) {
+    box-shadow: $shadow;
+}
+
+@mixin flexCenter($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing-function: ease-in-out) {
+    transition: $property $duration $timing-function;
+}
+
+@mixin gridMixin($gap: 1rem) {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: $gap;
+}
+
+@mixin absolute($top: 50%, $left: 50%) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    transform: translate(-50% ,-50%);
+}
+
+@mixin filtreBlack() {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.304);
+}
+
+@mixin lien() {
+    text-decoration: none;
+    text-transform: uppercase;
+}

@@ -1,0 +1,9 @@
+@use '../abstracts' as *;
+
+.btn{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: $blanc;
+    border-radius: 5px;
+    border: 1px solid blue;
+}
