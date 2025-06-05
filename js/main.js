@@ -28,6 +28,11 @@ class ApiConnect {
     return data;
   }
 
+  async getMealsById() {
+    const data = await this.fetchData(`lookup.php?i=${this.categorie}`);
+    return data;
+  }
+
   setCategories(category){
     this.categorie = category
   }
@@ -58,6 +63,22 @@ var swiper = new Swiper(".mySwiper", {
 
 ////// function ///////
 
+async function getUrl(element) {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get(element);
+
+  if (!slug) return;
+  lien.setCategories(slug);
+  if (element === 'categorie') {
+    const dataSingleCategory = await lien.getMealsByCategory();
+    return dataSingleCategory;
+  }
+
+  const dataSingleId = await lien.getMealsById();
+  return dataSingleId;
+
+}
+
 async function showTheCategories(){
 
   const dataCatgories = await lien.getCategories();
@@ -67,7 +88,7 @@ async function showTheCategories(){
     divCategories.innerHTML = '';
 
     for (const element of dataCatgories.categories) {
-      console.log(element);
+      // console.log(element);
       let a = document.createElement('a')
       let h3 = document.createElement('h3');
       let img = document.createElement('img');
@@ -89,13 +110,13 @@ async function showTheCategories(){
 
 function showTheCat(data, num , numfin) {
   let divCategories = document.querySelector('.main-categorie');
-
+  if(!divCategories) return;
   divCategories.innerHTML = '';
 
   const meals = data.meals.slice(num, numfin);
 
   for (const element of meals) {
-    console.log(element);
+    // console.log(element);
     let a = document.createElement('a')
     let h3 = document.createElement('h3');
     let img = document.createElement('img');
@@ -104,7 +125,7 @@ function showTheCat(data, num , numfin) {
     h3.classList.add('title-categorie')
     img.classList.add('img', 'img-categories')
 
-    a.href = `categorie.html?categorie=${element.strMeal}`;
+    a.href = `single.html?id=${element.idMeal}`;
     h3.textContent = element.strMeal;
     img.src = element.strMealThumb;
 
@@ -114,13 +135,8 @@ function showTheCat(data, num , numfin) {
 }
 
 async function pagination(){
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('categorie');
-
-  if (!slug) return;
-  lien.setCategories(slug);
-
-  const dataSingleCategory = await lien.getMealsByCategory();
+  let dataSingleCategory = await getUrl('categorie');  
+  
   let btnNext = document.querySelector('.next')
   let btnPre = document.querySelector('.prec')
 
@@ -145,13 +161,8 @@ async function pagination(){
 }
 
 async function ShowAllSingleCategorie() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('categorie');
 
-  if (!slug) return;
-  lien.setCategories(slug);
-
-  const dataSingleCategory = await lien.getMealsByCategory();
+  let dataSingleCategory = await getUrl('categorie');  
 
   let indexDebut = 0;
   let indexFin = 8;
@@ -159,7 +170,138 @@ async function ShowAllSingleCategorie() {
   showTheCat(dataSingleCategory, indexDebut, indexFin);
 }
 
+async function searchTheMille() {
+  const data = await getUrl('categorie');
+  
+  if (!data) return; 
+
+  let inputMeal = document.querySelector('.mealSearch');
+  let inputValue = inputMeal.value.trim().toLowerCase();
+  
+  const meals = data.meals.filter(element =>
+    Object.values(element).some(value =>
+      String(value).toLowerCase().includes(inputValue)
+    )
+  );
+  
+
+  if (inputValue) {
+  let divCategories = document.querySelector('.main-categorie');
+
+  divCategories.innerHTML = '';
+
+  for (const element of meals) {
+    console.log(element);
+    
+    // console.log(element);
+    let a = document.createElement('a')
+    let h3 = document.createElement('h3');
+    let img = document.createElement('img');
+
+    a.classList.add('card', 'col3')
+    h3.classList.add('title-categorie')
+    img.classList.add('img', 'img-categories')
+
+    a.href = `single.html?id=${element.idMeal}`;
+    h3.textContent = element.strMeal;
+    img.src = element.strMealThumb;
+
+    divCategories.appendChild(a)
+    a.append(h3, img)
+  }
+
+  }
+  
+}
+async function showSingleMiel() {
+  const datas = await getUrl('id')
+  const data = datas.meals[0];
+  console.log(data);
+  
+  
+  const main = document.querySelector('.main-single');
+
+  main.innerHTML = '';
+
+  const title = document.createElement('h1');
+  title.textContent = data.strMeal;
+  title.classList.add('recipe-title');
+
+  const img = document.createElement('img');
+  img.src = data.strMealThumb;
+  img.alt = data.strMeal;
+  img.classList.add('recipe-image');
+
+  const meta = document.createElement('p');
+  meta.textContent = `${data.strCategory} - ${data.strArea}`;
+  meta.classList.add('recipe-meta');
+
+  const tags = data.strTags ? data.strTags.split(',').map(tag => `#${tag}`).join(' ') : null;
+  const tagEl = document.createElement('p');
+  tagEl.textContent = tags || '';
+  tagEl.classList.add('recipe-tags');
+
+  const ingredientsList = document.createElement('ul');
+  ingredientsList.classList.add('recipe-ingredients');
+
+  for (let i = 1; i <= 20; i++) {
+    const ingredient = data[`strIngredient${i}`];
+    const measure = data[`strMeasure${i}`];
+
+    if (ingredient && ingredient.trim() !== '') {
+      const li = document.createElement('li');
+      li.textContent = `${measure || ''} ${ingredient}`.trim();
+      ingredientsList.appendChild(li);
+    }
+  }
+
+  const instructions = document.createElement('p');
+  instructions.textContent = data.strInstructions;
+  instructions.classList.add('recipe-instructions');
+
+  let youtubeLink = null;
+  if (data.strYoutube) {
+    youtubeLink = document.createElement('a');
+    youtubeLink.href = data.strYoutube;
+    youtubeLink.textContent = 'Voir la vidéo sur YouTube';
+    youtubeLink.classList.add('recipe-video');
+  }
+
+  let sourceLink = null;
+  if (data.strSource) {
+    sourceLink = document.createElement('a');
+    sourceLink.href = data.strSource;
+    sourceLink.textContent = 'Source originale';
+    sourceLink.classList.add('recipe-source');
+  }
+
+  // Append tout dans le main
+  main.append(
+    title,
+    img,
+    meta,
+    tagEl,
+    ingredientsList,
+    instructions,
+    youtubeLink,
+    sourceLink
+  );
+}
+
+
 ///// event ///////
+document.addEventListener('DOMContentLoaded', () =>{
+  let btnSearch = document.querySelector('.search');
+
+  if (btnSearch) {
+  btnSearch.addEventListener('click', (e) =>{
+
+    searchTheMille()
+    
+  })
+
+}
+})
 
 
 
@@ -168,3 +310,4 @@ async function ShowAllSingleCategorie() {
 showTheCategories();
 ShowAllSingleCategorie();
 pagination();
+showSingleMiel();
