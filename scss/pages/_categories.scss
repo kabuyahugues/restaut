@@ -3,3 +3,105 @@
 .div-search{
     margin-bottom: 5rem;
 }
+
+.main-cate {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+  
+  /* Barre de recherche */
+  .div-search {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .div-search input.mealSearch {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 250px;
+  }
+  
+  .div-search button.search {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .div-search button.search:hover {
+    background-color: #21867c;
+  }
+  
+
+  .prec,
+  .next {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #e94e77;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  .prec:hover,
+  .next:hover {
+    background-color: #d13b63;
+  }
+
+  .btnspani{
+    margin: 3rem auto;
+    width: 20%;
+  }
+
+/* Carte générale */
+.card.col3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-decoration: none;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    padding: 0;
+    color: inherit;
+  }
+  
+  .card.col3:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Image de la carte */
+  .img.img-categories {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* Titre de la carte */
+  .title-categorie {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 15px;
+    text-align: center;
+    color: #333;
+  }
+  
+  

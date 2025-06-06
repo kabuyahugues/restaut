@@ -216,49 +216,59 @@ async function searchTheMille() {
 async function showSingleMiel() {
   const datas = await getUrl('id')
   const data = datas.meals[0];
+  // if (data) return ;
   console.log(data);
   
   
   const main = document.querySelector('.main-single');
-
   main.innerHTML = '';
-
+  
+  // Colonnes
+  const leftCol = document.createElement('div');
+  leftCol.classList.add('left-column');
+  
+  const rightCol = document.createElement('div');
+  rightCol.classList.add('right-column');
+  
+  // Contenu gauche
   const title = document.createElement('h1');
   title.textContent = data.strMeal;
   title.classList.add('recipe-title');
-
+  
   const img = document.createElement('img');
   img.src = data.strMealThumb;
   img.alt = data.strMeal;
   img.classList.add('recipe-image');
-
+  
+  leftCol.appendChild(title);
+  leftCol.appendChild(img);
+  
+  // Contenu droit
   const meta = document.createElement('p');
   meta.textContent = `${data.strCategory} - ${data.strArea}`;
   meta.classList.add('recipe-meta');
-
+  
   const tags = data.strTags ? data.strTags.split(',').map(tag => `#${tag}`).join(' ') : null;
   const tagEl = document.createElement('p');
   tagEl.textContent = tags || '';
   tagEl.classList.add('recipe-tags');
-
+  
   const ingredientsList = document.createElement('ul');
   ingredientsList.classList.add('recipe-ingredients');
-
   for (let i = 1; i <= 20; i++) {
     const ingredient = data[`strIngredient${i}`];
     const measure = data[`strMeasure${i}`];
-
     if (ingredient && ingredient.trim() !== '') {
       const li = document.createElement('li');
       li.textContent = `${measure || ''} ${ingredient}`.trim();
       ingredientsList.appendChild(li);
     }
   }
-
+  
   const instructions = document.createElement('p');
   instructions.textContent = data.strInstructions;
   instructions.classList.add('recipe-instructions');
-
+  
   let youtubeLink = null;
   if (data.strYoutube) {
     youtubeLink = document.createElement('a');
@@ -266,7 +276,7 @@ async function showSingleMiel() {
     youtubeLink.textContent = 'Voir la vidéo sur YouTube';
     youtubeLink.classList.add('recipe-video');
   }
-
+  
   let sourceLink = null;
   if (data.strSource) {
     sourceLink = document.createElement('a');
@@ -274,18 +284,17 @@ async function showSingleMiel() {
     sourceLink.textContent = 'Source originale';
     sourceLink.classList.add('recipe-source');
   }
-
-  // Append tout dans le main
-  main.append(
-    title,
-    img,
-    meta,
-    tagEl,
-    ingredientsList,
-    instructions,
-    youtubeLink,
-    sourceLink
-  );
+  
+  rightCol.appendChild(meta);
+  rightCol.appendChild(tagEl);
+  rightCol.appendChild(ingredientsList);
+  rightCol.appendChild(instructions);
+  if (youtubeLink) rightCol.appendChild(youtubeLink);
+  if (sourceLink) rightCol.appendChild(sourceLink);
+  
+  main.appendChild(leftCol);
+  main.appendChild(rightCol);
+  
 }
 
 

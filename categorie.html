@@ -10,7 +10,16 @@
 <body>
 <header class="header-index">
   <nav>
-
+    <ul>
+    <li><a href="index.html">home</a></li>
+    <li>
+      <ul>
+        <li>
+          <a class="navCategorie" href="">category</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
   </nav>
   <h1>
     Bienvenu sur mon site de recette 
@@ -21,7 +30,7 @@
   </p>
 </header>
 
-<main>
+<main class="main-cate">
     <div class="div-search">
           <input type="text" class="mealSearch" value ='asa'>
           <button class="search">Chercher</button>
@@ -32,13 +41,36 @@
         </div>
 
     </div>
-    <button class="prec"> Précédent </button>
-    <button class="next"> Fin </button>
+    <div class="btnspani">
+      <button class="prec"> Précédent </button>
+      <button class="next"> Fin </button>
+    </div>
 </main>
 
 
-<footer>
-
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>À propos</h3>
+      <p>Ce site propose des services de qualité pour vos projets web et digitaux.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Liens utiles</h3>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Email : contact@monsite.com</p>
+      <p>Téléphone : 01 23 45 67 89</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 MonSite. Tous droits réservés.
+  </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>  
 <script src="js/main.js"></script>

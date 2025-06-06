@@ -26,3 +26,68 @@ header{
     }
     margin-bottom: 5rem;
 }
+
+/* Barre de navigation */
+nav {
+    background-color: rgba(255, 255, 255, 0.432);
+    padding: 15px 30px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Menu principal */
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-menu > li {
+    position: relative;
+  }
+  
+  /* Liens du menu */
+  .nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.3s;
+  }
+  
+  .nav-menu a:hover {
+    background-color: #21867c;
+  }
+  
+  /* Sous-menu */
+  .submenu {
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #38b2a6;
+    padding: 10px 0;
+    min-width: 160px;
+    display: none;
+    flex-direction: column;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .submenu li a {
+    padding: 10px 15px;
+    display: block;
+    color: white;
+  }
+  
+  .submenu li a:hover {
+    background-color: #21867c;
+  }
+  
+  /* Affichage du sous-menu au survol */
+  .has-submenu:hover .submenu {
+    display: flex;
+  }
+  

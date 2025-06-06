@@ -20,3 +20,9 @@
     color: black;
     margin-bottom: 3rem;
 }
+
+.img-qui{
+    @include boxShadow(); 
+    border-radius: 10px;
+
+}
